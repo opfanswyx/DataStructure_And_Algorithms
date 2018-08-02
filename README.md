@@ -1,6 +1,6 @@
 # 数据结构与算法
 
-[《数据结构与算法》](http://www.tup.tsinghua.edu.cn/booksCenter/book_06931402.html)学习记录 :+1: :+1:
+[《数据结构与算法》](http://www.tup.tsinghua.edu.cn/booksCenter/book_06931402.html)学习记录 :pushpin: :pushpin:
 
 ## [线性表](/线性表/线性表.md)
 ## [栈](/栈/栈.md)
@@ -12,4 +12,4 @@
 ## [图](/图/图.md)
 ## [查找](/查找/查找.md)
 ## [排序](/排序/排序.md)
-## [文件](/文件/文件.md)
+## [文件结构](/文件结构/文件结构.md)
