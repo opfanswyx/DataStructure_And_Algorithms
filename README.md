@@ -3,7 +3,7 @@
 [《数据结构与算法》](http://www.tup.tsinghua.edu.cn/booksCenter/book_06931402.html)学习记录 :pushpin: :pushpin:
 
 ## [线性表](/1.线性表/线性表.md)
-* 顺序存储
+* * [ ] 顺序存储
 * 链式存储
 * 双链表
 * 循环链表(约瑟夫环)
