@@ -21,6 +21,6 @@ int BinarySort(int arr[], int n)
         {
             arr[j+1]=arr[j];
         }
-        arr[high+1]=temp;
+        arr[high+1]=tmp;
     }
 }
