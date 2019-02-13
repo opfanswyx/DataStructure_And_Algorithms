@@ -32,24 +32,24 @@
 /*
 *   Prototypes
 */
-#define ALPHABET_SIZE    256     
-#define MAXLEN 256
+#define ALPHABET_SIZE    256    	//字母表大小 
+#define MAXLEN 256					//最大长度
 
-#define ACSM_FAIL_STATE   -1     
+#define ACSM_FAIL_STATE   -1     	//fail指针初始状态
 
 typedef struct _acsm_pattern {      
 
-	struct  _acsm_pattern *next;
-	unsigned char         *patrn;
-	unsigned char         *casepatrn;
-	int      n;
-	int      nocase;
-	void   * id;
+	struct  _acsm_pattern *next;			//链表下一个节点
+	unsigned char         *patrn;			//转换为大写字符模式串
+	unsigned char         *casepatrn;		//区分大小写模式字符串
+	int      n;								//模式串长度
+	int      nocase;						//大小写敏感标志
+	void   	 *id;
 	int		 nmatch;
 
 } ACSM_PATTERN;
 
-
+//状态机表
 typedef struct  {    
 
 	/* Next state - based on input character */
@@ -69,16 +69,16 @@ typedef struct  {
 */
 typedef struct {
 
-	int acsmMaxStates;  
-	int acsmNumStates;  
+	int acsmMaxStates;  						//状态机最大状态数
+	int acsmNumStates;  						//状态机实际状态数
 
-	ACSM_PATTERN    * acsmPatterns;
-	ACSM_STATETABLE * acsmStateTable;
+	ACSM_PATTERN    * acsmPatterns;				//模式串链表	
+	ACSM_STATETABLE * acsmStateTable;			//状态表
 
 }ACSM_STRUCT;
 
 /*
-*   Prototypes
+*   Prototypes 原型
 */
 ACSM_STRUCT * acsmNew ();
 int acsmAddPattern( ACSM_STRUCT * p, unsigned char * pat, int n,int nocase);

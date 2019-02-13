@@ -25,8 +25,9 @@ int main (int argc, char **argv)
 
 	acsm = acsmNew ();
 
-	strcpy (filename, argv[1]);
-	fd = fopen(filename,"r");
+	strcpy (filename, argv[1]);					//获取文件名
+
+	fd = fopen(filename,"r");					//打开文件
 	if(fd == NULL)
 	{
 		fprintf(stderr,"Open file error!\n");
@@ -36,10 +37,12 @@ int main (int argc, char **argv)
 	for (i = 1; i < argc; i++)
 		if (strcmp (argv[i], "-nocase") == 0)
 			nocase = 1;
+	
 	for (i = 2; i < argc; i++)
 	{
 		if (argv[i][0] == '-')
 			continue;
+		
 		acsmAddPattern (acsm, argv[i], strlen (argv[i]), nocase);
 	}
 
@@ -58,7 +61,6 @@ int main (int argc, char **argv)
 	acsmFree (acsm);
 
 	printf ("\n### AC Match Finished ###\n");
-//	system("pause");
 
 	return (0);
 }

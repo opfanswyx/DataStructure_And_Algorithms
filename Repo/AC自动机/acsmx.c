@@ -62,13 +62,15 @@
 #include <ctype.h>
 #include "acsmx.h"
 
+//打印信息宏
 #define MEMASSERT(p,s) if(!p){fprintf(stderr,"ACSM-No Memory: %s!\n",s);exit(0);}
 
 /*Define the number of the line,when match a keyword*/
-extern int nline=1;
+extern int nline = 1;
 
 /*
 * Malloc the AC Memory
+* 封装的malloc函数
 */ 
 static void *AC_MALLOC (int n) 
 {
@@ -80,6 +82,7 @@ static void *AC_MALLOC (int n)
 
 /*
 *Free the AC Memory
+*封装的free函数
 */ 
 static void AC_FREE (void *p) 
 {
@@ -89,27 +92,30 @@ static void AC_FREE (void *p)
 
 
 /*
-*    Simple QUEUE NODE
+*Simple QUEUE NODE
+*队列节点
 */ 
 typedef struct _qnode
 {
-	int state;
+	int state;					//????????
 	struct _qnode *next;
 }QNODE;
 
 /*
-*    Simple QUEUE Structure
+*Simple QUEUE Structure
+*队列结构，队列头，尾指针
 */ 
 typedef struct _queue
 {
 	QNODE * head, *tail;
-	int count;
+	int count;				//队列里成员数量
 }QUEUE;
 
 /*
 *Init the Queue
+*初始化队列
 */ 
-static void queue_init (QUEUE * s) 
+static void queue_init (QUEUE *s) 
 {
 	s->head = s->tail = 0;
 	s->count = 0;
@@ -118,10 +124,11 @@ static void queue_init (QUEUE * s)
 
 /*
 *  Add Tail Item to queue
+*  队尾添加成员
 */ 
-static void queue_add (QUEUE * s, int state) 
+static void queue_add (QUEUE *s, int state) 
 {
-	QNODE * q;
+	QNODE *q;
 	/*Queue is empty*/
 	if (!s->head)
 	{
@@ -135,7 +142,7 @@ static void queue_add (QUEUE * s, int state)
 	{
 		q = (QNODE *) AC_MALLOC (sizeof (QNODE));
 		MEMASSERT (q, "queue_add");
-		q->state = state;
+		q->state = state;								//????????????
 		q->next = 0;
 		/*Add the new Node into the queue*/
 		s->tail->next = q;
@@ -148,6 +155,7 @@ static void queue_add (QUEUE * s, int state)
 
 /*
 *  Remove Head Item from queue
+*  队列头弹出成员
 */ 
 static int queue_remove (QUEUE * s) 
 {
@@ -176,6 +184,7 @@ static int queue_remove (QUEUE * s)
 
 /*
 *Return The count of the Node in the Queue
+*返回队列中成员总数
 */ 
 static int queue_count (QUEUE * s) 
 {
@@ -185,6 +194,7 @@ static int queue_count (QUEUE * s)
 
 /*
 *Free the Queue Memory
+*释放队列结构
 */ 
 static void queue_free (QUEUE * s) 
 {
@@ -197,12 +207,15 @@ static void queue_free (QUEUE * s)
 
 /*
 ** Case Translation Table 
+** 翻译表
 */ 
 static unsigned char xlatcase[256];
 
 /*
 * Init the xlatcase Table,Trans alpha to UpperMode
 * Just for the NoCase State
+* 初始化翻译表，将字母统一转换为大写模式
+* 为了不区分大小写模式
 */ 
 static void init_xlatcase () 
 {
@@ -215,6 +228,7 @@ static void init_xlatcase ()
 
 /*
 *Convert the pattern string into upper
+*将模式字符串转换为大写字母
 */ 
 static void ConvertCaseEx (unsigned char *d, unsigned char *s, int m) 
 {
@@ -227,7 +241,7 @@ static void ConvertCaseEx (unsigned char *d, unsigned char *s, int m)
 
 /*
 *  Add a pattern to the list of patterns terminated at this state.
-*  Insert at front of list.
+*  Insert at front of list.	头插法
 */ 
 static void AddMatchListEntry (ACSM_STRUCT * acsm, int state, ACSM_PATTERN * px) 
 {
@@ -247,8 +261,8 @@ static void AddMatchListEntry (ACSM_STRUCT * acsm, int state, ACSM_PATTERN * px)
 static void AddPatternStates (ACSM_STRUCT * acsm, ACSM_PATTERN * p) 
 {
 	unsigned char *pattern;
-	int state=0, next, n;
-	n = p->n; /*The number of alpha in the pattern string*/
+	int state = 0, next, n;
+	n = p->n; 								/*The number of alpha in the pattern string*/
 	pattern = p->patrn;
 
 	/* 
@@ -278,6 +292,7 @@ static void AddPatternStates (ACSM_STRUCT * acsm, ACSM_PATTERN * p)
 
 /*
 *   Build Non-Deterministic Finite Automata
+*   建立非状态又穷状态机
 */ 
 static void Build_DFA (ACSM_STRUCT * acsm) 
 {
@@ -351,7 +366,7 @@ static void Build_DFA (ACSM_STRUCT * acsm)
 */ 
 ACSM_STRUCT * acsmNew () 
 {
-	ACSM_STRUCT * p;
+	ACSM_STRUCT *p;
 	init_xlatcase ();
 	p = (ACSM_STRUCT *) AC_MALLOC (sizeof (ACSM_STRUCT));
 	MEMASSERT (p, "acsmNew");
@@ -395,7 +410,7 @@ int acsmCompile (ACSM_STRUCT * acsm)
 	ACSM_PATTERN * plist;
 
 	/* Count number of states */ 
-	acsm->acsmMaxStates = 1; /*State 0*/
+	acsm->acsmMaxStates = 1; 						/*State 0*/
 	for (plist = acsm->acsmPatterns; plist != NULL; plist = plist->next)
 	{
 		acsm->acsmMaxStates += plist->n;
