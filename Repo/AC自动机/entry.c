@@ -1,6 +1,6 @@
 /*
-Author: wangyao
-Email: wangyao@cs.hit.edu.cn
+Author: Atticus
+Email: opfanswyx@outlook.com
 */
 #include "acsmx.h"
 
@@ -34,6 +34,7 @@ int main (int argc, char **argv)
 		exit(1);
 	}
 
+	//选择是否大小写敏感
 	for (i = 1; i < argc; i++)
 		if (strcmp (argv[i], "-nocase") == 0)
 			nocase = 1;
@@ -42,7 +43,7 @@ int main (int argc, char **argv)
 	{
 		if (argv[i][0] == '-')
 			continue;
-		
+		/*将命令行上得非'-'开头的字符串作为自动机字典树构造来源*/
 		acsmAddPattern (acsm, argv[i], strlen (argv[i]), nocase);
 	}
 

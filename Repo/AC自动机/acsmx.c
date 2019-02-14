@@ -257,6 +257,7 @@ static void AddMatchListEntry (ACSM_STRUCT * acsm, int state, ACSM_PATTERN * px)
 
 /* 
 * Add Pattern States
+* 将字符串链表里的字符串构造成字典树
 */ 
 static void AddPatternStates (ACSM_STRUCT * acsm, ACSM_PATTERN * p) 
 {
@@ -292,7 +293,7 @@ static void AddPatternStates (ACSM_STRUCT * acsm, ACSM_PATTERN * p)
 
 /*
 *   Build Non-Deterministic Finite Automata
-*   建立非状态又穷状态机
+*   bfs算法，构建fail指针
 */ 
 static void Build_DFA (ACSM_STRUCT * acsm) 
 {
@@ -302,7 +303,7 @@ static void Build_DFA (ACSM_STRUCT * acsm)
 	ACSM_PATTERN * mlist=0;
 	ACSM_PATTERN * px=0;
 
-	/* Init a Queue */ 
+	/* Init a Queue 创建一个队列*/ 
 	queue_init (queue);
 
 	/* Add the state 0 transitions 1st */
@@ -363,6 +364,7 @@ static void Build_DFA (ACSM_STRUCT * acsm)
 
 /*
 * Init the acsm DataStruct
+* 创建一个自动机结构体
 */ 
 ACSM_STRUCT * acsmNew () 
 {
@@ -378,6 +380,7 @@ ACSM_STRUCT * acsmNew ()
 
 /*
 *   Add a pattern to the list of patterns for this state machine
+*   添加构造字典树的到字符串到字符串链表
 */ 
 int acsmAddPattern (ACSM_STRUCT * p, unsigned char *pat, int n, int nocase) 
 {
@@ -392,9 +395,10 @@ int acsmAddPattern (ACSM_STRUCT * p, unsigned char *pat, int n, int nocase)
 	memcpy (plist->casepatrn, pat, n);
 	plist->n = n;
 	plist->nocase = nocase;
-	plist->nmatch=0;
+	plist->nmatch=0;							//???????????
 
 	/*Add the pattern into the pattern list*/
+	/*头插法，将字符串信息链表添加到自动机相对应的结构体*/
 	plist->next = p->acsmPatterns;
 	p->acsmPatterns = plist;
 
@@ -403,6 +407,7 @@ int acsmAddPattern (ACSM_STRUCT * p, unsigned char *pat, int n, int nocase)
 
 /*
 *   Compile State Machine
+*   编译状态机
 */ 
 int acsmCompile (ACSM_STRUCT * acsm) 
 {
@@ -413,6 +418,7 @@ int acsmCompile (ACSM_STRUCT * acsm)
 	acsm->acsmMaxStates = 1; 						/*State 0*/
 	for (plist = acsm->acsmPatterns; plist != NULL; plist = plist->next)
 	{
+		/*将每个字符串的长度加起来*/
 		acsm->acsmMaxStates += plist->n;
 	}
 
@@ -426,9 +432,9 @@ int acsmCompile (ACSM_STRUCT * acsm)
 	/* Initialize all States NextStates to FAILED */ 
 	for (k = 0; k < acsm->acsmMaxStates; k++)
 	{
-		for (i = 0; i < ALPHABET_SIZE; i++)
+		for (i = 0; i < ALPHABET_SIZE; i++)		//ALPHABET == 256
 		{
-			acsm->acsmStateTable[k].NextState[i] = ACSM_FAIL_STATE;
+			acsm->acsmStateTable[k].NextState[i] = ACSM_FAIL_STATE;  //ACSM_FAIL_STATE == -1 
 		}
 	}
 
@@ -436,6 +442,7 @@ int acsmCompile (ACSM_STRUCT * acsm)
 	/* Add each Pattern to the State Table */ 
 	for (plist = acsm->acsmPatterns; plist != NULL; plist = plist->next)
 	{
+		/*将字符串链表里的字符串构造成字典树*/
 		AddPatternStates (acsm, plist);
 	}
 
@@ -460,6 +467,7 @@ static unsigned char Tc[64*1024];
 
 /*
 *   Search Text or Binary Data for Pattern matches
+*   自动机匹配过程
 */ 
 int acsmSearch (ACSM_STRUCT * acsm, unsigned char *Tx, int n,void (*PrintMatch) (ACSM_PATTERN * pattern,ACSM_PATTERN * mlist, int nline,int index)) 
 {
@@ -502,6 +510,7 @@ int acsmSearch (ACSM_STRUCT * acsm, unsigned char *Tx, int n,void (*PrintMatch) 
 
 /*
 *   Free all memory
+*   释放自动机结构
 */ 
 void acsmFree (ACSM_STRUCT * acsm) 
 {
@@ -527,6 +536,7 @@ void acsmFree (ACSM_STRUCT * acsm)
 
 /* 
 *   Print A Match String's Information
+*   打印匹配字符串信息
 */ 
 void PrintMatch (ACSM_PATTERN * pattern,ACSM_PATTERN * mlist, int nline,int index) 
 {

@@ -45,7 +45,7 @@ typedef struct _acsm_pattern {
 	int      n;								//模式串长度
 	int      nocase;						//大小写敏感标志
 	void   	 *id;
-	int		 nmatch;
+	int		 nmatch;						
 
 } ACSM_PATTERN;
 
@@ -53,7 +53,7 @@ typedef struct _acsm_pattern {
 typedef struct  {    
 
 	/* Next state - based on input character */
-	int      NextState[ ALPHABET_SIZE ];  
+	int      NextState[ ALPHABET_SIZE ];  				
 
 	/* Failure state - used while building NFA & DFA  */
 	int      FailState;   
