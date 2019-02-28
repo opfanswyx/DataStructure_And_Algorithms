@@ -2,18 +2,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define HASHSIZE 10  //¹şÏ£±í³¤¶È
+#define HASHSIZE 10  //å“ˆå¸Œè¡¨é•¿åº¦
 
 typedef struct
 {
-	int* elem;  //Êı×é£¬¶¯Ì¬·ÖÅä
-	int count;  //µ±Ç°ÔªËØ¸öÊı
+	int* elem;  //æ•°ç»„ï¼ŒåŠ¨æ€åˆ†é…
+	int count;  //å½“å‰å…ƒç´ ä¸ªæ•°
 }HashTable;
 
-int m = 0;    //¹şÏ£±í³¤£¬È«¾Ö±äÁ¿
+int m = 0;    //å“ˆå¸Œè¡¨é•¿ï¼Œå…¨å±€å˜é‡
 
 
-//¹şÏ£±í³õÊ¼»¯
+//å“ˆå¸Œè¡¨åˆå§‹åŒ–
 void InitHashTable(HashTable* h)
 {
 	int i;
@@ -25,30 +25,30 @@ void InitHashTable(HashTable* h)
 	return;
 }
 
-//¹¹Ôì¹şÏ£º¯Êı
+//æ„é€ å“ˆå¸Œå‡½æ•°
 int Hash(int key)
 {
-	return key%m; //³ıÁôÓàÊı·¨
+	return key%m; //é™¤ç•™ä½™æ•°æ³•
 }
 
-//²åÈë²Ù×÷
+//æ’å…¥æ“ä½œ
 void InsertHash(HashTable* h, int key)
 {
-	int addr = Hash(key); //Çó¹şÏ£µØÖ·
+	int addr = Hash(key); //æ±‚å“ˆå¸Œåœ°å€
 	while (h->elem[addr] != NULL)
-		addr = (addr + 1) % m; //ÏßĞÔÌ½²â·¨´¦Àí³åÍ»
+		addr = (addr + 1) % m; //çº¿æ€§æ¢æµ‹æ³•å¤„ç†å†²çª
 	h->elem[addr] = key;
 }
 
-//²éÕÒ
+//æŸ¥æ‰¾
 int SearchHash(HashTable h, int key, int *addr)
 {
-	*addr = Hash(key);  //Çó¹şÏ£µØÖ·
+	*addr = Hash(key);  //æ±‚å“ˆå¸Œåœ°å€
 	while (h.elem[*addr] != key)
 	{
-		*addr = (*addr + 1) % m; //¿ª·Å¶¨Ö·µÄÏßĞÔÌ½²â
-		if (h.elem[*addr] == NULL || *addr == Hash(key)) //Èç¹ûÑ­»·»Øµ½Ô­µã
-			return 0;   //ËµÃ÷¹Ø¼ü×Ö²»´æÔÚ
+		*addr = (*addr + 1) % m; //å¼€æ”¾å®šå€çš„çº¿æ€§æ¢æµ‹
+		if (h.elem[*addr] == NULL || *addr == Hash(key)) //å¦‚æœå¾ªç¯å›åˆ°åŸç‚¹
+			return 0;   //è¯´æ˜å…³é”®å­—ä¸å­˜åœ¨
 	}
 	return 1;
 }
@@ -61,16 +61,16 @@ int main()
 	for (int i = 0; i < 10; i++)
 		InsertHash(&ht, arr[i]);
 	
-	int num;  //Òª²éÕÒµÄÊı¾İ
-	printf("ÇëÊäÈëÒª²éÕÒµÄÊı¾İ£º\n");
+	int num;  //è¦æŸ¥æ‰¾çš„æ•°æ®
+	printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„æ•°æ®ï¼š\n");
 	scanf("%d", &num);
 
 	int addr = Hash(num);
 	int ret = SearchHash(ht, num, &addr);
 	if (ret)
-		printf("²éÕÒ³É¹¦£¡\n");
+		printf("æŸ¥æ‰¾æˆåŠŸï¼\n");
 	else
-		printf("²éÕÒÊ§°Ü£¡\n");
+		printf("æŸ¥æ‰¾å¤±è´¥ï¼\n");
 
 	system("pause");
 	return 0;

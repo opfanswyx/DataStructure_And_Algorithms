@@ -1,31 +1,31 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
-//Ë÷ÒıË³Ğò²éÕÒ£¨·Ö¿é²éÕÒ£©
-struct indexBlock   //¶¨Òå¿éµÄ½á¹¹
+//ç´¢å¼•é¡ºåºæŸ¥æ‰¾ï¼ˆåˆ†å—æŸ¥æ‰¾ï¼‰
+struct indexBlock   //å®šä¹‰å—çš„ç»“æ„
 {
 	int max;
 	int start;
 	int end;
-} indexBlock[4];   //¶¨ÒåË÷Òı±í£¬ÀïÃæÓĞ4¸östruct¶ÔÏó
+} indexBlock[4];   //å®šä¹‰ç´¢å¼•è¡¨ï¼Œé‡Œé¢æœ‰4ä¸ªstructå¯¹è±¡
 
 int blockSearch(int key, int a[])
 {
 	int i = 0;
 	int j;
 
-	while (i<3 && key>indexBlock[i].max) //È·¶¨ÔÚÄÄ¸ö×Ó±íÖĞ 
+	while (i<3 && key>indexBlock[i].max) //ç¡®å®šåœ¨å“ªä¸ªå­è¡¨ä¸­ 
 		i++;
 
-	if (i >= 3)  //´óÓÚ·ÖµÄ¿éÊı£¬Ôò·µ»Ø-1,ÕÒ²»µ½¸ÃÊı     
+	if (i >= 3)  //å¤§äºåˆ†çš„å—æ•°ï¼Œåˆ™è¿”å›-1,æ‰¾ä¸åˆ°è¯¥æ•°     
 		return -1;
 
-	j = indexBlock[i].start;    //jµÈÓÚ¿é·¶Î§µÄÆğÊ¼Öµ
+	j = indexBlock[i].start;    //jç­‰äºå—èŒƒå›´çš„èµ·å§‹å€¼
 
-	while (j <= indexBlock[i].end && a[j] != key) //ÔÚÈ·¶¨µÄ¿éÄÚ½øĞĞ²éÕÒ  
+	while (j <= indexBlock[i].end && a[j] != key) //åœ¨ç¡®å®šçš„å—å†…è¿›è¡ŒæŸ¥æ‰¾  
 		j++;
 
-	if (j > indexBlock[i].end) //Èç¹û´óÓÚ¿é·¶Î§µÄ½áÊøÖµ£¬ÔòËµÃ÷Ã»ÓĞÒª²éÕÒµÄÊı£¬jÖÃÎª-1     
+	if (j > indexBlock[i].end) //å¦‚æœå¤§äºå—èŒƒå›´çš„ç»“æŸå€¼ï¼Œåˆ™è¯´æ˜æ²¡æœ‰è¦æŸ¥æ‰¾çš„æ•°ï¼Œjç½®ä¸º-1     
 		j = -1;
 
 	return j;
@@ -34,8 +34,8 @@ int blockSearch(int key, int a[])
 int main()
 {
 	int j = -1;
-	int a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }; //²éÕÒ±í
-	printf("ÒÑÖª²éÕÒ±í:\n");
+	int a[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 }; //æŸ¥æ‰¾è¡¨
+	printf("å·²çŸ¥æŸ¥æ‰¾è¡¨:\n");
 	for (int i = 0; i < 15; i++) 
 		printf("%d ", a[i]);
 
@@ -43,26 +43,26 @@ int main()
 
 	for (int i = 0; i < 3; i++) 
 	{
-		indexBlock[i].start = j + 1; //È·¶¨Ã¿¸ö¿é·¶Î§µÄÆğÊ¼Öµ
+		indexBlock[i].start = j + 1; //ç¡®å®šæ¯ä¸ªå—èŒƒå›´çš„èµ·å§‹å€¼
 		j = j + 1;
 
-		indexBlock[i].end = j + 3;   //È·¶¨Ã¿¸ö¿é·¶Î§µÄ½áÊøÖµ
+		indexBlock[i].end = j + 3;   //ç¡®å®šæ¯ä¸ªå—èŒƒå›´çš„ç»“æŸå€¼
 		j = j + 3;
 
-		indexBlock[i].max = a[j];    //È·¶¨Ã¿¸ö¿é·¶Î§ÖĞÔªËØµÄ×î´óÖµ
+		indexBlock[i].max = a[j];    //ç¡®å®šæ¯ä¸ªå—èŒƒå›´ä¸­å…ƒç´ çš„æœ€å¤§å€¼
 	}
 
-	printf("ÇëÊäÈëÄãÒª²éÕÒµÄÊı£º\n");
+	printf("è¯·è¾“å…¥ä½ è¦æŸ¥æ‰¾çš„æ•°ï¼š\n");
 	int key;
 	scanf("%d", &key);
 	int index = blockSearch(key, a);
 
 	if (index >= 0) {
-		printf("²éÕÒ³É¹¦£¡ÄãÒª²éÕÒµÄÊı²éÕÒ±íÖĞµÄÎ»ÖÃÊÇ£º%d\n", index);
+		printf("æŸ¥æ‰¾æˆåŠŸï¼ä½ è¦æŸ¥æ‰¾çš„æ•°æŸ¥æ‰¾è¡¨ä¸­çš„ä½ç½®æ˜¯ï¼š%d\n", index);
 	}
 	else{
 
-		printf("²éÕÒÊ§°Ü£¡ÄãÒª²éÕÒµÄÊı²»ÔÚ²éÕÒ±íÖĞ¡£\n");
+		printf("æŸ¥æ‰¾å¤±è´¥ï¼ä½ è¦æŸ¥æ‰¾çš„æ•°ä¸åœ¨æŸ¥æ‰¾è¡¨ä¸­ã€‚\n");
 	}
 
 	system("pause");
