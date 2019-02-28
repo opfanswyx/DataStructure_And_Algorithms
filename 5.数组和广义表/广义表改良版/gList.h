@@ -3,19 +3,19 @@
 
 typedef struct LinkListsNode
 {
-	int tag;							//±êÖ¾Î»
+	int tag;							//æ ‡å¿—ä½
 	union
 	{
-		int data;					//µ¥ÔªËØ
-		struct LinkListsNode *Lists;	//Ö¸Ïò×Ó±íµÄÖ¸Õë
+		int data;					//å•å…ƒç´ 
+		struct LinkListsNode *Lists;	//æŒ‡å‘å­è¡¨çš„æŒ‡é’ˆ
 	}value;
-	struct LinkListsNode *link;			//Ö¸ÏòÏÂÒ»¸öÔªËØ
-}LSNode;								//¹ãÒå±í½áµãÀàĞÍ¶¨Òå
-//Çó¹ãÒå±íµÄ³¤¶È
+	struct LinkListsNode *link;			//æŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
+}LSNode;								//å¹¿ä¹‰è¡¨ç»“ç‚¹ç±»å‹å®šä¹‰
+//æ±‚å¹¿ä¹‰è¡¨çš„é•¿åº¦
 int LSLength(LSNode *ls);
-//Çó¹ãÒå±íµÄÉî¶È
+//æ±‚å¹¿ä¹‰è¡¨çš„æ·±åº¦
 int LSDepth(LSNode *ls);
-//Êä³ö¹ãÒå±íls
+//è¾“å‡ºå¹¿ä¹‰è¡¨ls
 void LSDis(LSNode *ls);
-//¹ãÒå±í´´½¨
+//å¹¿ä¹‰è¡¨åˆ›å»º
 void LSCreate(LSNode** ls, int flag);

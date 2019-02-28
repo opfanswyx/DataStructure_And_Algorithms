@@ -3,7 +3,7 @@
 int main()
 {
 	LSNode *ls;
-	printf("ÇëÊäÈë¹ãÒå±í£º");
+	printf("è¯·è¾“å…¥å¹¿ä¹‰è¡¨ï¼š");
 	LSCreate(&ls, 0);
 	LSDis(ls);
 	int len = LSLength(ls);

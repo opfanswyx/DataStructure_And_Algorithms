@@ -1,7 +1,7 @@
 #include "Matrix.h"
 
 TSMatrix NewMatrix(int m, int n){
-	//ĞÂ½¨Ò»¸öÈıÔª×é±íÊ¾µÄÏ¡Êè¾ØÕó   
+	//æ–°å»ºä¸€ä¸ªä¸‰å…ƒç»„è¡¨ç¤ºçš„ç¨€ç–çŸ©é˜µ   
 	TSMatrix M;
 	M.rows = m;
 	M.cols = n;
@@ -9,46 +9,46 @@ TSMatrix NewMatrix(int m, int n){
 	return M;
 }
 Status InsertElem(TSMatrix *M, int row, int col, ElemType value){
-	//ÔÚÈıÔª×é±íÊ¾µÄÏ¡Êè¾ØÕóM£¬µÚ row ĞĞ£¬µÚ col ÁĞÎ»ÖÃ²åÈëÔªËØvalue   
-	//²åÈë³É¹¦£¬·µ»Ø0£¬·ñÔò·µ»Ø-1   
+	//åœ¨ä¸‰å…ƒç»„è¡¨ç¤ºçš„ç¨€ç–çŸ©é˜µMï¼Œç¬¬ row è¡Œï¼Œç¬¬ col åˆ—ä½ç½®æ’å…¥å…ƒç´ value   
+	//æ’å…¥æˆåŠŸï¼Œè¿”å›0ï¼Œå¦åˆ™è¿”å›-1   
 	int i, t, p;
-	if (M->nums >= MAXSIZE){//µ±Ç°ÈıÔª×é±íÒÑÂú   
+	if (M->nums >= MAXSIZE){//å½“å‰ä¸‰å…ƒç»„è¡¨å·²æ»¡   
 		printf("\nError:There is no space in the matrix;\n");
 		return 0;
 	}
-	//Êı×éÔ½½ç
+	//æ•°ç»„è¶Šç•Œ
 	if (row>M->rows || col>M->cols || row<1 || col<1){
 		printf("\nError:Insert position is beyond the arrange.\n");
 		return -1;
 	}
-	p = 1;//±êÖ¾ĞÂÔªËØÓ¦¸Ã²åÈëµÄÎ»ÖÃ   
-	if (M->nums == 0){//²åÈëÇ°¾ØÕóMÃ»ÓĞ·ÇÁãÔªËØ   
+	p = 1;//æ ‡å¿—æ–°å…ƒç´ åº”è¯¥æ’å…¥çš„ä½ç½®   
+	if (M->nums == 0){//æ’å…¥å‰çŸ©é˜µMæ²¡æœ‰éé›¶å…ƒç´    
 		M->data[p].row = row;
 		M->data[p].col = col;
 		M->data[p].value = value;
 		M->nums++;
 		return 0;
 	}
-	for (t = 1; t <= M->nums; t++)//Ñ°ÕÒºÏÊÊµÄ²åÈëÎ»ÖÃ  
+	for (t = 1; t <= M->nums; t++)//å¯»æ‰¾åˆé€‚çš„æ’å…¥ä½ç½®  
 	{
-		//ĞĞ±Èµ±Ç°ĞĞ´ó£¬p++
+		//è¡Œæ¯”å½“å‰è¡Œå¤§ï¼Œp++
 		if (row > M->data[t].row)
 			p++;
-		//ĞĞÏàµÈµ«ÊÇÁĞ±Èµ±Ç°ÁĞ´ó,p++
+		//è¡Œç›¸ç­‰ä½†æ˜¯åˆ—æ¯”å½“å‰åˆ—å¤§,p++
 		if ((row == M->data[t].row) && (col > M->data[t].col))
 			p++;
 	}
-	//²åÈëÇ°£¬¸ÃÎ»ÖÃÒÑÓĞÊı¾İ£¬Ôò¸üĞÂÊıÖµ
+	//æ’å…¥å‰ï¼Œè¯¥ä½ç½®å·²æœ‰æ•°æ®ï¼Œåˆ™æ›´æ–°æ•°å€¼
 	if (row == M->data[t - 1].row && col == M->data[t - 1].col){
 		M->data[t - 1].value = value;
 		return 0;
 	}
-	for (i = M->nums; i >= p; i--){//ÒÆ¶¯pÖ®ºóµÄÔªËØ   
+	for (i = M->nums; i >= p; i--){//ç§»åŠ¨pä¹‹åçš„å…ƒç´    
 		M->data[i + 1].row = M->data[i].row;
 		M->data[i + 1].col = M->data[i].col;
 		M->data[i + 1].value = M->data[i].value;
 	}
-	//²åÈëĞÂÔªËØ   
+	//æ’å…¥æ–°å…ƒç´    
 	M->data[p].row = row;
 	M->data[p].col = col;
 	M->data[p].value = value;
@@ -58,7 +58,7 @@ Status InsertElem(TSMatrix *M, int row, int col, ElemType value){
 
 
 Status sMatrixTranspose(const TSMatrix *M, TSMatrix *N){
-	//²ÉÓÃÈıÔª×é±í´æ´¢±íÊ¾£¬ÇóÏ¡Êè¾ØÕóMµÄ×ªÖÃ¾ØÕóT   
+	//é‡‡ç”¨ä¸‰å…ƒç»„è¡¨å­˜å‚¨è¡¨ç¤ºï¼Œæ±‚ç¨€ç–çŸ©é˜µMçš„è½¬ç½®çŸ©é˜µT   
 	int col, p, q;
 	N->rows = M->cols;
 	N->cols = M->rows;
@@ -79,21 +79,21 @@ Status sMatrixTranspose(const TSMatrix *M, TSMatrix *N){
 
 Status sMatrixFastTranspose(const TSMatrix *M, TSMatrix *N)
 {
-	//¾ØÕóNµÄ³ÉÔ±³õÊ¼»¯
+	//çŸ©é˜µNçš„æˆå‘˜åˆå§‹åŒ–
 	N->rows = M->cols;
 	N->cols = M->rows;
 	N->nums = M->nums;
-	if (N->nums)	//Èç¹û¾ØÕóÖĞÓĞ·ÇÁãÔªËØ
+	if (N->nums)	//å¦‚æœçŸ©é˜µä¸­æœ‰éé›¶å…ƒç´ 
 	{
-		int col;		//¸¨ÖúÊı×éµÄÏÂ±ê
+		int col;		//è¾…åŠ©æ•°ç»„çš„ä¸‹æ ‡
 		int num[COLS + 1] = { 0 }, cpot[COLS + 2] = { 0 };
 		int t;
 		for (t = 1; t <= M->cols; t++)
-			num[M->data[t].col]++;		//ÇóMÖĞÃ¿Ò»ÁĞÖĞ·ÇÁãÔªËØ¸öÊı
-		cpot[1] = 1;	//µÚÒ»ĞĞµÄµÚÒ»¸ö·ÇÁãÔªËØµÄÎ»ÖÃ¿Ï¶¨ÔÚ1
+			num[M->data[t].col]++;		//æ±‚Mä¸­æ¯ä¸€åˆ—ä¸­éé›¶å…ƒç´ ä¸ªæ•°
+		cpot[1] = 1;	//ç¬¬ä¸€è¡Œçš„ç¬¬ä¸€ä¸ªéé›¶å…ƒç´ çš„ä½ç½®è‚¯å®šåœ¨1
 		for (col = 2; col <= M->nums; col++)
-			//µÚcolĞĞµÄµÚÒ»¸ö·ÇÁãÔªËØµÄÎ»ÖÃ£¬
-			//µÈÓÚËüÇ°Ò»ĞĞµÄµÚÒ»¸ö·ÇÁãÔªËØµÄÎ»ÖÃ£¬¼ÓÉÏ¸ÃĞĞ·ÇÁãÔªËØµÄ¸öÊı
+			//ç¬¬colè¡Œçš„ç¬¬ä¸€ä¸ªéé›¶å…ƒç´ çš„ä½ç½®ï¼Œ
+			//ç­‰äºå®ƒå‰ä¸€è¡Œçš„ç¬¬ä¸€ä¸ªéé›¶å…ƒç´ çš„ä½ç½®ï¼ŒåŠ ä¸Šè¯¥è¡Œéé›¶å…ƒç´ çš„ä¸ªæ•°
 			cpot[col] = cpot[col - 1] + num[col - 1];
 		int p, q;
 		for (p = 1; p <= M->nums; p++)
@@ -110,10 +110,10 @@ Status sMatrixFastTranspose(const TSMatrix *M, TSMatrix *N)
 }
 
 void sMatrixPrint(const TSMatrix *M){
-	//´òÓ¡Ï¡Êè¾ØÕóËùÓĞÔªËØ   
+	//æ‰“å°ç¨€ç–çŸ©é˜µæ‰€æœ‰å…ƒç´    
 	int i, j, p = 1;
-	printf("\nsize:%d ¡Á %d\n", M->rows, M->cols);
-	if (!M->nums){//0¾ØÕó   
+	printf("\nsize:%d Ã— %d\n", M->rows, M->cols);
+	if (!M->nums){//0çŸ©é˜µ   
 		printf("%d\n", 0.0);
 		return;
 	}

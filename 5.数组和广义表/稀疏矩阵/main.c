@@ -1,10 +1,10 @@
 #include "Matrix.h"
 int main()
 {
-	//´´½¨¾ØÕó
+	//åˆ›å»ºçŸ©é˜µ
 	TSMatrix M = NewMatrix(6, 7);
 	TSMatrix N;
-	//Ïò¾ØÕóÖĞ²åÈëÊı¾İ
+	//å‘çŸ©é˜µä¸­æ’å…¥æ•°æ®
 	InsertElem(&M, 1, 2, 11);
 	InsertElem(&M, 1, 3, 21);
 	InsertElem(&M, 2, 4, 2);
@@ -13,16 +13,16 @@ int main()
 	InsertElem(&M, 4, 3, 12);
 	InsertElem(&M, 5, 2, 26);
 	InsertElem(&M, 6, 5, 10);
-	//´òÓ¡¾ØÕó
+	//æ‰“å°çŸ©é˜µ
 	printf("\nM:");
 	sMatrixPrint(&M);
-	//´òÓ¡Ê¹ÓÃ·½°¸a×ªÖÃµÄ¾ØÕó
+	//æ‰“å°ä½¿ç”¨æ–¹æ¡ˆaè½¬ç½®çš„çŸ©é˜µ
 	sMatrixTranspose(&M, &N);
-	printf("\nN(Transpose of M)¡ª¡ªa:");
+	printf("\nN(Transpose of M)â€”â€”a:");
 	sMatrixPrint(&N);
-	//´òÓ¡Ê¹ÓÃ·½°¸b×ªÖÃµÄ¾ØÕó
+	//æ‰“å°ä½¿ç”¨æ–¹æ¡ˆbè½¬ç½®çš„çŸ©é˜µ
 	sMatrixFastTranspose(&M, &N);
-	printf("\nN(Transpose of M)¡ª¡ªb:");
+	printf("\nN(Transpose of M)â€”â€”b:");
 	sMatrixPrint(&N);
 	return 0;
 }

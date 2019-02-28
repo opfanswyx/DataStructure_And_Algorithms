@@ -1,22 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//½á¹¹Ìå¶¨Òå
+//ç»“æ„ä½“å®šä¹‰
 typedef struct LinkListsNode
 {
-	int tag;							//±êÖ¾Î»
+	int tag;							//æ ‡å¿—ä½
 	union
 	{
-		char atom;						//µ¥ÔªËØ
-		struct LinkListsNode *Lists;	//Ö¸Ïò×Ó±íµÄÖ¸Õë
+		char atom;						//å•å…ƒç´ 
+		struct LinkListsNode *Lists;	//æŒ‡å‘å­è¡¨çš„æŒ‡é’ˆ
 	}value;
-	struct LinkListsNode *link;			//Ö¸ÏòÍ¬Ò»²ãÖĞµÄºó¼ÌÔªËØ
-}LSNode;								//¹ãÒå±í½áµãÀàĞÍ¶¨Òå
-//¹ãÒå±íµÄµİ¹é´´½¨
+	struct LinkListsNode *link;			//æŒ‡å‘åŒä¸€å±‚ä¸­çš„åç»§å…ƒç´ 
+}LSNode;								//å¹¿ä¹‰è¡¨ç»“ç‚¹ç±»å‹å®šä¹‰
+//å¹¿ä¹‰è¡¨çš„é€’å½’åˆ›å»º
 void LSCreate(LSNode** ls);
-//µİ¹éÇó¹ãÒå±íµÄÉî¶È
+//é€’å½’æ±‚å¹¿ä¹‰è¡¨çš„æ·±åº¦
 int LSDepth(LSNode *ls);
-//Êä³ö¹ãÒå±íls
+//è¾“å‡ºå¹¿ä¹‰è¡¨ls
 void LSDis(LSNode *ls);
-//Çó¹ãÒå±íµÄ³¤¶È
+//æ±‚å¹¿ä¹‰è¡¨çš„é•¿åº¦
 int LSLength(LSNode *ls);

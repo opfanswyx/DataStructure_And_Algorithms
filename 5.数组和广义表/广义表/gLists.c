@@ -1,66 +1,66 @@
 #include "gList.h"
 
-//¹ãÒå±íµÄµİ¹é´´½¨
+//å¹¿ä¹‰è¡¨çš„é€’å½’åˆ›å»º
 void LSCreate(LSNode** ls)
 {
 	char ch;
 	ch = getchar();
 	if (ch == ')')
 		*ls = NULL;
-	else if (ch == '(')							//µ±Ç°×Ö·ûÎª×óÀ¨ºÅÊ±
+	else if (ch == '(')							//å½“å‰å­—ç¬¦ä¸ºå·¦æ‹¬å·æ—¶
 	{
-		*ls = (LSNode*)malloc(sizeof(LSNode));	//´´½¨Ò»¸öĞÂ½áµã
-		(*ls)->tag = 1;						//ĞÂ½áµã×÷Îª±íÍ·½áµã
-		LSCreate(&((*ls)->value.Lists));	//µİ¹é¹¹Ôì×Ó±í²¢Á´½Óµ½±íÍ·½áµã
+		*ls = (LSNode*)malloc(sizeof(LSNode));	//åˆ›å»ºä¸€ä¸ªæ–°ç»“ç‚¹
+		(*ls)->tag = 1;						//æ–°ç»“ç‚¹ä½œä¸ºè¡¨å¤´ç»“ç‚¹
+		LSCreate(&((*ls)->value.Lists));	//é€’å½’æ„é€ å­è¡¨å¹¶é“¾æ¥åˆ°è¡¨å¤´ç»“ç‚¹
 	}
 	else
 	{
-		*ls = (LSNode*)malloc(sizeof(LSNode));	//´´½¨Ò»¸öĞÂ½áµã
-		(*ls)->tag = 0;						//ÊÇµ¥ÔªËØ
-		(*ls)->value.atom = ch;				//ĞÂ½áµã×÷Îªµ¥ÔªËØ½áµã
+		*ls = (LSNode*)malloc(sizeof(LSNode));	//åˆ›å»ºä¸€ä¸ªæ–°ç»“ç‚¹
+		(*ls)->tag = 0;						//æ˜¯å•å…ƒç´ 
+		(*ls)->value.atom = ch;				//æ–°ç»“ç‚¹ä½œä¸ºå•å…ƒç´ ç»“ç‚¹
 	}
-	ch = getchar();								//È¡ÏÂÒ»¸ö×Ö·û	
-	if ((*ls) == NULL);							//´®Î´½áÊø£¬¼ÌĞø¹¹ÔìĞÖµÜ½áµã
-	else if (ch == ',')							//µ±Ç°×Ö·ûÎª","
-		LSCreate(&((*ls)->link));			//µİ¹é¹¹ÔìĞÖµÜ½áµã	
-	else									//Ã»ÓĞĞÖµÜÁË£¬½«ĞÖµÜÖ¸ÕëÖÃÎªNULL
+	ch = getchar();								//å–ä¸‹ä¸€ä¸ªå­—ç¬¦	
+	if ((*ls) == NULL);							//ä¸²æœªç»“æŸï¼Œç»§ç»­æ„é€ å…„å¼Ÿç»“ç‚¹
+	else if (ch == ',')							//å½“å‰å­—ç¬¦ä¸º","
+		LSCreate(&((*ls)->link));			//é€’å½’æ„é€ å…„å¼Ÿç»“ç‚¹	
+	else									//æ²¡æœ‰å…„å¼Ÿäº†ï¼Œå°†å…„å¼ŸæŒ‡é’ˆç½®ä¸ºNULL
 		(*ls)->link = NULL;
-	return;									//·µ»Ø
+	return;									//è¿”å›
 }
 
-//µİ¹éÇó¹ãÒå±íµÄÉî¶È
+//é€’å½’æ±‚å¹¿ä¹‰è¡¨çš„æ·±åº¦
 int LSDepth(LSNode *ls)
 {
-	if (ls->tag == 0)					//Îªµ¥ÔªËØÊ±·µ»Ø0
+	if (ls->tag == 0)					//ä¸ºå•å…ƒç´ æ—¶è¿”å›0
 		return 0;
 	int max = 0, dep;
-	LSNode *gls = ls->value.Lists;		//glsÖ¸ÏòµÚÒ»¸öÔªËØ 
-	if (gls == NULL)					//¿Õ±í·µ»Ø1
+	LSNode *gls = ls->value.Lists;		//glsæŒ‡å‘ç¬¬ä¸€ä¸ªå…ƒç´  
+	if (gls == NULL)					//ç©ºè¡¨è¿”å›1
 		return 1;
-	while (gls != NULL)				 //²»Îª¿Õ±éÀú±íÖĞµÄÃ¿Ò»¸öÔªËØ
+	while (gls != NULL)				 //ä¸ä¸ºç©ºéå†è¡¨ä¸­çš„æ¯ä¸€ä¸ªå…ƒç´ 
 	{
-		if (gls->tag == 1)			 //ÔªËØÎª×Ó±íµÄÇé¿ö
+		if (gls->tag == 1)			 //å…ƒç´ ä¸ºå­è¡¨çš„æƒ…å†µ
 		{
-			dep = LSDepth(gls);		 //µİ¹éµ÷ÓÃÇó³ö×Ó±íµÄÉî¶È
-			if (dep > max)			 //maxÎªÍ¬Ò»²ãËùÇó¹ıµÄ×Ó±íÉî¶È×î´óÖµ
+			dep = LSDepth(gls);		 //é€’å½’è°ƒç”¨æ±‚å‡ºå­è¡¨çš„æ·±åº¦
+			if (dep > max)			 //maxä¸ºåŒä¸€å±‚æ‰€æ±‚è¿‡çš„å­è¡¨æ·±åº¦æœ€å¤§å€¼
 				max = dep;
 		}
-		gls = gls->link;			//Ê¹glsÖ¸ÏòÏÂÒ»¸öÔªËØ
+		gls = gls->link;			//ä½¿glsæŒ‡å‘ä¸‹ä¸€ä¸ªå…ƒç´ 
 	}
-	return (max + 1);				//·µ»Ø±íµÄÉî¶È
+	return (max + 1);				//è¿”å›è¡¨çš„æ·±åº¦
 }
-//Êä³ö¹ãÒå±íls
+//è¾“å‡ºå¹¿ä¹‰è¡¨ls
 void LSDis(LSNode *ls)
 {
 	if (ls->tag == 0)
-		printf("%c", ls->value.atom);	//Êä³öµ¥ÔªËØÖµ
+		printf("%c", ls->value.atom);	//è¾“å‡ºå•å…ƒç´ å€¼
 	else
 	{
 		printf("(");
 		if (ls->value.Lists == NULL)
-			printf("");					//¿Õ±íÊ²Ã´Ò²²»Êä³ö
+			printf("");					//ç©ºè¡¨ä»€ä¹ˆä¹Ÿä¸è¾“å‡º
 		else
-			LSDis(ls->value.Lists);		//µİ¹éÊä³ö×Ó±í
+			LSDis(ls->value.Lists);		//é€’å½’è¾“å‡ºå­è¡¨
 		printf(")");
 	}
 	if (ls->link != NULL)
@@ -70,16 +70,16 @@ void LSDis(LSNode *ls)
 	}
 }
 
-//Çó¹ãÒå±íµÄ³¤¶È
+//æ±‚å¹¿ä¹‰è¡¨çš„é•¿åº¦
 int LSLength(LSNode *ls)
 {
 	int n = 0;
-	if (ls->tag == 0)			//Îªµ¥ÔªËØÊ±·µ»Ø0
+	if (ls->tag == 0)			//ä¸ºå•å…ƒç´ æ—¶è¿”å›0
 		return 1;
-	ls = ls->value.Lists;		//glsÖ¸Ïò¹ãÒå±íµÄµÚÒ»¸öÔªËØ
+	ls = ls->value.Lists;		//glsæŒ‡å‘å¹¿ä¹‰è¡¨çš„ç¬¬ä¸€ä¸ªå…ƒç´ 
 	while (ls != NULL)
 	{
-		n++;					//ÀÛ¼ÓÔªËØ¸öÊı
+		n++;					//ç´¯åŠ å…ƒç´ ä¸ªæ•°
 		ls = ls->link;
 	}
 	return n;

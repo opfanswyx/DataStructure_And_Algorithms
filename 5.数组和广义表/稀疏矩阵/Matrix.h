@@ -11,25 +11,25 @@
 
 typedef int Status;
 typedef int ElemType;
-typedef struct{		//ÈıÔª×é½á¹¹   
-	int row;		//ĞĞºÅ  
-	int col;		//ÁĞºÅ
-	ElemType value;//·ÇÁãÔªËØÖµ   
+typedef struct{		//ä¸‰å…ƒç»„ç»“æ„   
+	int row;		//è¡Œå·  
+	int col;		//åˆ—å·
+	ElemType value;//éé›¶å…ƒç´ å€¼   
 }Triples;
 typedef struct{
-	Triples data[MAXSIZE + 1];//·ÇÁãÔªÈıÔª×é±í£¬data[0]²»ÓÃ   
-	int rows, cols, nums;//¾ØÕóµÄĞĞÊı¡¢ÁĞÊıºÍ·ÇÁãÔªËØ¸öÊı   
+	Triples data[MAXSIZE + 1];//éé›¶å…ƒä¸‰å…ƒç»„è¡¨ï¼Œdata[0]ä¸ç”¨   
+	int rows, cols, nums;//çŸ©é˜µçš„è¡Œæ•°ã€åˆ—æ•°å’Œéé›¶å…ƒç´ ä¸ªæ•°   
 }TSMatrix;
 
-//ĞÂ½¨Ò»¸öÈıÔª×é±íÊ¾µÄÏ¡Êè¾ØÕó   
+//æ–°å»ºä¸€ä¸ªä¸‰å…ƒç»„è¡¨ç¤ºçš„ç¨€ç–çŸ©é˜µ   
 TSMatrix NewMatrix(int m, int n);
-//ÏòÊ¹ÓÃÈıÔª×é±íÊ¾µÄÏ¡Êè¾ØÕóMÖĞ²åÈëÊı¾İ
+//å‘ä½¿ç”¨ä¸‰å…ƒç»„è¡¨ç¤ºçš„ç¨€ç–çŸ©é˜µMä¸­æ’å…¥æ•°æ®
 Status InsertElem(TSMatrix *M, int row, int col, ElemType value);
-//¾ØÕó×ªÖÃ£¬½«Ê¹ÓÃÈıÔª×é±íÊ¾µÄÏ¡Êè¾ØÕóM×ªÖÃ£¬²¢´æÈëNÖĞ
+//çŸ©é˜µè½¬ç½®ï¼Œå°†ä½¿ç”¨ä¸‰å…ƒç»„è¡¨ç¤ºçš„ç¨€ç–çŸ©é˜µMè½¬ç½®ï¼Œå¹¶å­˜å…¥Nä¸­
 Status sMatrixTranspose(const TSMatrix *M, TSMatrix *N);
-//¿ìËÙ×ªÖÃ£¬½«Ê¹ÓÃÈıÔª×é±íÊ¾µÄÏ¡Êè¾ØÕóM×ªÖÃ£¬²¢´æÈëNÖĞ
+//å¿«é€Ÿè½¬ç½®ï¼Œå°†ä½¿ç”¨ä¸‰å…ƒç»„è¡¨ç¤ºçš„ç¨€ç–çŸ©é˜µMè½¬ç½®ï¼Œå¹¶å­˜å…¥Nä¸­
 Status sMatrixFastTranspose(const TSMatrix *M, TSMatrix *N);
-//¾ØÕó´òÓ¡£¬½«Ê¹ÓÃÈıÔª×é±íÊ¾µÄÏ¡Êè¾ØÕóM´òÓ¡µ½ÆÁÄ»
+//çŸ©é˜µæ‰“å°ï¼Œå°†ä½¿ç”¨ä¸‰å…ƒç»„è¡¨ç¤ºçš„ç¨€ç–çŸ©é˜µMæ‰“å°åˆ°å±å¹•
 void sMatrixPrint(const TSMatrix *M);
-//¾ØÕó³Ë·¨
+//çŸ©é˜µä¹˜æ³•
 void mmult(Triples a[], Triples b[], Triples d[]);
