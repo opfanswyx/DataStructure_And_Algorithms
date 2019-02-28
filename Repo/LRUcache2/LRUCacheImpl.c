@@ -38,10 +38,12 @@ static void freeCacheEntry(cacheEntryS* entry)
 int LRUCacheCreate(int capacity, void **lruCache)
 {
     LRUCacheS* cache = NULL;
+
     if (NULL == (cache=malloc(sizeof(*cache)))) {
         perror("malloc");
         return -1;
     }
+
     memset(cache, 0, sizeof(*cache));
     cache->cacheCapacity = capacity;
     cache->hashMap = (cacheEntryS**)malloc(sizeof(cacheEntryS)*capacity);
@@ -99,7 +101,7 @@ static void removeFromList(LRUCacheS *cache, cacheEntryS *entry)
     cache->lruListSize--;
 }
 
-/* 将节点插入到链表表头*/ 
+/* 将节点插入到链表表头 */ 
 static cacheEntryS * insertToListHead(LRUCacheS *cache, cacheEntryS *entry) 
 {
     cacheEntryS *removedEntry = NULL;
