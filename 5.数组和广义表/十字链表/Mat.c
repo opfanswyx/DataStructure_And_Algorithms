@@ -1,41 +1,41 @@
 #include "Mat.h"
-//´´½¨Ò»¸öÊ®×ÖÁ´±í£¬²¢Ê¹ÓÃÊı×éa³õÊ¼»¯
+//åˆ›å»ºä¸€ä¸ªåå­—é“¾è¡¨ï¼Œå¹¶ä½¿ç”¨æ•°ç»„aåˆå§‹åŒ–
 void cmatCreate(MatNode *&hm, ElemType a[ROW][COL])
 {
 	int i, j;
-	//Í·½áµãÖ¸Õë
+	//å¤´ç»“ç‚¹æŒ‡é’ˆ
 	MatNode *h[Max], *p, *q, *r;
-	hm = (MatNode*)malloc(sizeof(MatNode));			//¾ØÕóÖ¸Õëhm
-	hm->row = ROW;									//³õÊ¼»¯ĞĞ
-	hm->col = COL;									//³õÊ¼»¯ÁĞ
+	hm = (MatNode*)malloc(sizeof(MatNode));			//çŸ©é˜µæŒ‡é’ˆhm
+	hm->row = ROW;									//åˆå§‹åŒ–è¡Œ
+	hm->col = COL;									//åˆå§‹åŒ–åˆ—
 	r = hm;
 	for (i = 0; i < Max; i++)
 	{
 		h[i] = (MatNode*)malloc(sizeof(MatNode));
-		h[i]->right = h[i];							//¹¹³ÉÑ­»·
+		h[i]->right = h[i];							//æ„æˆå¾ªç¯
 		h[i]->down = h[i];
-		r->tag.link = h[i];							//½«Í·Ö¸ÕëÁ´½ÓÆğÀ´
+		r->tag.link = h[i];							//å°†å¤´æŒ‡é’ˆé“¾æ¥èµ·æ¥
 		r = h[i];
 	}
-	r->tag.link = hm;								//½«Ö¸ÕëÖØĞÂÖ¸Ïò¾ØÕóÍ·½áµã
+	r->tag.link = hm;								//å°†æŒ‡é’ˆé‡æ–°æŒ‡å‘çŸ©é˜µå¤´ç»“ç‚¹
 	for (i = 0; i < ROW; i++)
 	{
 		for (j = 0; j < COL; j++)
 		{
-			if (a[i][j] != 0)						//¸³Öµ³õÊ¼»¯
+			if (a[i][j] != 0)						//èµ‹å€¼åˆå§‹åŒ–
 			{
 				p = (MatNode*)malloc(sizeof(MatNode));
 				p->row = i;
 				p->col = j;
 				p->tag.value = a[i][j];
 				q = h[i];
-				//²åÈëĞĞÁ´±í
+				//æ’å…¥è¡Œé“¾è¡¨
 				while (q->right != h[i] && q->right->col < j)
 					q = q->right;
 				p->right = q->right;
 				q->right = p;
 				q = h[j];
-				//²åÈëÁĞÁ´±í
+				//æ’å…¥åˆ—é“¾è¡¨
 				while (q->down != h[j] && q->down->row < i)
 					q = q->down;
 				p->down = q->down;
@@ -48,7 +48,7 @@ void cmatCreate(MatNode *&hm, ElemType a[ROW][COL])
 void cmatPrint(MatNode *hm)
 {
 	MatNode *p, *q;
-	printf("ĞĞ = %d£¬ÁĞ = %d\n", hm->row, hm->col);
+	printf("è¡Œ = %dï¼Œåˆ— = %d\n", hm->row, hm->col);
 	p = hm->tag.link;
 	while (p != hm)
 	{

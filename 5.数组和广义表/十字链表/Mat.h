@@ -15,8 +15,8 @@ typedef struct MatrixPointer
 		ElemType value;
 		struct MatrixPointer *link;
 	}tag;
-}MatNode;		//Ê®×ÖÁ´±íÀàĞÍ¶¨Òå
-//´´½¨Ò»¸öÊ®×ÖÁ´±í£¬²¢Ê¹ÓÃÊı×éa³õÊ¼»¯
+}MatNode;		//åå­—é“¾è¡¨ç±»å‹å®šä¹‰
+//åˆ›å»ºä¸€ä¸ªåå­—é“¾è¡¨ï¼Œå¹¶ä½¿ç”¨æ•°ç»„aåˆå§‹åŒ–
 void cmatCreate(MatNode *&hm, ElemType a[ROW][COL]);
-//Êä³ö
+//è¾“å‡º
 void cmatPrint(MatNode *hm);
