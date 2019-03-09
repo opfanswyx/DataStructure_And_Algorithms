@@ -1,3 +1,5 @@
+#include<stdio.h>
+
 int BinarySort(int arr[], int n)
 {
     int i,j;
@@ -23,4 +25,24 @@ int BinarySort(int arr[], int n)
         }
         arr[high+1]=tmp;
     }
+}
+
+int main()
+{
+    int i;
+    //int arr[10]={10,9,8,7,6,5,4,3,2,1};
+    int arr[10]={5,0,9,8,1,4,6,3,7,5};
+
+    printf("before sort:\n");
+    for(i=0;i<10;i++)
+        printf("[%d] ",arr[i]);
+    printf("\n");
+
+    BinarySort(arr,10);
+
+    printf("after sort:\n");
+    for(i=0;i<10;i++)
+        printf("[%d] ",arr[i]);
+    printf("\n");
+    return 0;
 }

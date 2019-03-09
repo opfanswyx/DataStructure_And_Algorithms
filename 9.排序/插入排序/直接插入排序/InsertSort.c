@@ -1,10 +1,12 @@
+#include<stdio.h>
 void InsertSort(int arr[], int n)
 {
     int i,j;
-    for(i=1;i<n;i++)
+    //初始时默认arr[0]为有序arr[1...n]无序
+    for(i=1;i<n;i++)    
     {
         int tmp=arr[i];
-        if(tmp>arr[i-1]) //后一个数大于前一个数
+        if(tmp>arr[i-1])    //后一个数大于前一个数，稳定排序
         {
             for(j=i-1;j>=0&&tmp>arr[j];j--)
             {
@@ -15,13 +17,7 @@ void InsertSort(int arr[], int n)
     }
 }
 
-/*
- * 直接插入排序
- *
- * 参数说明：
- *     a -- 待排序的数组
- *     n -- 数组的长度
- */
+
 void insert_sort(int a[], int n)
 {
     int i, j, k;
@@ -44,4 +40,24 @@ void insert_sort(int a[], int n)
             a[k + 1] = temp;
         }
     }
+}
+
+int main()
+{
+    int i;
+    //int arr[10]={10,9,8,7,6,5,4,3,2,1};
+    int arr[10]={5,0,9,8,1,4,6,3,7,5};
+
+    printf("before sort:\n");
+    for(i=0;i<10;i++)
+        printf("[%d] ",arr[i]);
+    printf("\n");
+
+    InsertSort(arr,10);
+
+    printf("after sort:\n");
+    for(i=0;i<10;i++)
+        printf("[%d] ",arr[i]);
+    printf("\n");
+    return 0;
 }

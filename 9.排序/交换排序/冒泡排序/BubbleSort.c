@@ -1,3 +1,4 @@
+#include<stdio.h>
 //交换函数
 void swap(int *a, int *b)
 {
@@ -19,7 +20,7 @@ void BubbleSort(int arr[], int n)
     }
 }
 //优化版optimization
-void BubbleSort(int arr[], int n)
+void BubbleSort_t(int arr[], int n)
 {
     int i,j;
     int flag=1;     //标记
@@ -37,4 +38,22 @@ void BubbleSort(int arr[], int n)
             }
         }
     }
+}
+int main()
+{
+    int i;
+    int arr[10]={1,2,3,4,5,6,7,8,9,10};
+
+    printf("before sort:\n");
+    for(i=0;i<10;i++)
+        printf("[%d] ",arr[i]);
+    printf("\n");
+
+    BubbleSort(arr,10);
+
+    printf("after sort:\n");
+    for(i=0;i<10;i++)
+        printf("[%d] ",arr[i]);
+    printf("\n");
+    return 0;
 }
