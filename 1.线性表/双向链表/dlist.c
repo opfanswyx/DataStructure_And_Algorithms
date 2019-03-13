@@ -69,7 +69,7 @@ int DlistInsert(pHead ph, int pos, int val)
 		else
 		{
 			int i;
-			for(i=1; i<pos; i++)
+			for(i=1; i<pos; i++)	//i!=0因为pos=0做了特殊的处理
 			{
 				pCur=pCur->next;
 			}
@@ -139,6 +139,7 @@ void DlistDestory(pHead ph)
 	ph->length=0;
 	ph->next=NULL;
 }
+//从前打印
 void printFront(pHead ph)
 {
 	if(ph==NULL)
@@ -153,6 +154,7 @@ void printFront(pHead ph)
 	}
 	printf("\n");
 }
+//从后打印
 void printLast(pHead ph)
 {
 	if(ph==NULL)
