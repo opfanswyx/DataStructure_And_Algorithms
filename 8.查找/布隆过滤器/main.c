@@ -1,3 +1,8 @@
+/**
+ * https://www.cnblogs.com/haippy/archive/2012/07/14/2590669.html
+ * https://www.cnblogs.com/zengdan-develpoer/p/4425167.html
+ * https://www.cnblogs.com/Jack47/p/bloom_filter_intro.html
+ * */
 #include<stdio.h>
 #include<string.h>
 
