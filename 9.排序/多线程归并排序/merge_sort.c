@@ -112,7 +112,7 @@ void* merge_sort(void* arg)
 	/* 若 l==r 则不必排序 */
 	if (l < r) 
 	{	
-		/* 声明两个线程买描述符 */
+		/* 声明两个线程描述符 */
 		pthread_t tid1;
 		pthread_t tid2;
 

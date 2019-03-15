@@ -60,6 +60,8 @@ service mysql status
 ```
 show processlist
 max(id)
+最大分区
+最大主键值
 ```
 
 # 前台
@@ -68,5 +70,8 @@ max(id)
 
 ## 前台组件
 ### Elasticsearch
+
 ### rabbitMQ
+
 ### 天兔插件
+
