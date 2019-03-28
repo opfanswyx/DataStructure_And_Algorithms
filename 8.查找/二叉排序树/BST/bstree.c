@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "bstree.h"
-
-
 /*
  * 前序遍历"二叉树"
  */
@@ -15,7 +13,6 @@ void preorder_bstree(BSTree tree)
         preorder_bstree(tree->right);
     }
 }
-
 /*
  * 中序遍历"二叉树"
  */
@@ -28,7 +25,6 @@ void inorder_bstree(BSTree tree)
         inorder_bstree(tree->right);
     }
 }
-
 /*
  * 后序遍历"二叉树"
  */
@@ -41,7 +37,6 @@ void postorder_bstree(BSTree tree)
         printf("%d ", tree->key);
     }
 }
-
 /*
  * (递归实现)查找"二叉树x"中键值为key的节点
  */
@@ -55,7 +50,6 @@ Node* bstree_search(BSTree x, Type key)
     else
         return bstree_search(x->right, key);
 }
-
 /*
  * (非递归实现)查找"二叉树x"中键值为key的节点
  */
@@ -71,7 +65,6 @@ Node* iterative_bstree_search(BSTree x, Type key)
 
     return x;
 }
-
 /* 
  * 查找最小结点：返回tree为根结点的二叉树的最小结点。
  */
@@ -84,7 +77,6 @@ Node* bstree_minimum(BSTree tree)
         tree = tree->left;
     return tree;
 }
- 
 /* 
  * 查找最大结点：返回tree为根结点的二叉树的最大结点。
  */
@@ -97,7 +89,6 @@ Node* bstree_maximum(BSTree tree)
         tree = tree->right;
     return tree;
 }
-
 /* 
  * 找结点(x)的后继结点。即，查找"二叉树中数据值大于该结点"的"最小结点"。
  */
@@ -119,7 +110,6 @@ Node* bstree_successor(Node *x)
 
     return y;
 }
- 
 /* 
  * 找结点(x)的前驱结点。即，查找"二叉树中数据值小于该结点"的"最大结点"。
  */
@@ -141,7 +131,6 @@ Node* bstree_predecessor(Node *x)
 
     return y;
 }
-
 /*
  * 创建并返回二叉树结点。
  *
@@ -164,7 +153,6 @@ static Node* create_bstree_node(Type key, Node *parent, Node *left, Node* right)
 
     return p;
 }
-
 /* 
  * 将结点插入到二叉树中
  *
@@ -199,7 +187,6 @@ static Node* bstree_insert(BSTree tree, Node *z)
 
     return tree;
 }
-
 /* 
  * 新建结点(key)，并将其插入到二叉树中
  *
@@ -219,7 +206,6 @@ Node* insert_bstree(BSTree tree, Type key)
 
     return bstree_insert(tree, z);
 }
-
 /* 
  * 删除结点(z)，并返回根节点
  *
@@ -262,7 +248,6 @@ static Node* bstree_delete(BSTree tree, Node *z)
 
     return tree;
 }
-
 /* 
  * 删除结点(key为节点的键值)，并返回根节点
  *
@@ -281,7 +266,6 @@ Node* delete_bstree(BSTree tree, Type key)
 
     return tree;
 }
-
 /*
  * 销毁二叉树
  */
@@ -297,7 +281,6 @@ void destroy_bstree(BSTree tree)
 
     free(tree);
 }
-
 /*
  * 打印"二叉树"
  *

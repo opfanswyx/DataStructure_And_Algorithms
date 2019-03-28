@@ -16,7 +16,6 @@ void main()
         printf("%d ", arr[i]);
         root = insert_bstree(root, arr[i]);
     }
-
     printf("\n== 前序遍历: ");
     preorder_bstree(root);
 
@@ -38,7 +37,6 @@ void main()
     printf("\n== 中序遍历: ");
     inorder_bstree(root);
     printf("\n");
-
     // 销毁二叉树
     destroy_bstree(root);
 }

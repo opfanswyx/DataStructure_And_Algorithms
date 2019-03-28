@@ -41,5 +41,4 @@ Node* avltree_delete(AVLTree tree, Type key);
 // 销毁AVL树
 void destroy_avltree(AVLTree tree);
 
-
 #endif

@@ -11,7 +11,6 @@
 
 #define HEIGHT(p)    ( (p==NULL) ? -1 : (((Node *)(p))->height) )
 #define MAX(a, b)    ( (a) > (b) ? (a) : (b) )
-
 /*
  * 获取AVL树的高度
  */
@@ -19,7 +18,6 @@ int avltree_height(AVLTree tree)
 {
     return HEIGHT(tree);
 }
-
 /*
  * 前序遍历"AVL树"
  */
@@ -32,8 +30,6 @@ void preorder_avltree(AVLTree tree)
         preorder_avltree(tree->right);
     }
 }
-
-
 /*
  * 中序遍历"AVL树"
  */
@@ -46,7 +42,6 @@ void inorder_avltree(AVLTree tree)
         inorder_avltree(tree->right);
     }
 }
-
 /*
  * 后序遍历"AVL树"
  */
@@ -59,7 +54,6 @@ void postorder_avltree(AVLTree tree)
         printf("%d ", tree->key);
     }
 }
-
 /*
  * (递归实现)查找"AVL树x"中键值为key的节点
  */
@@ -73,7 +67,6 @@ Node* avltree_search(AVLTree x, Type key)
     else
         return avltree_search(x->right, key);
 }
-
 /*
  * (非递归实现)查找"AVL树x"中键值为key的节点
  */
@@ -89,7 +82,6 @@ Node* iterative_avltree_search(AVLTree x, Type key)
 
     return x;
 }
-
 /* 
  * 查找最小结点：返回tree为根结点的AVL树的最小结点。
  */
@@ -102,7 +94,6 @@ Node* avltree_minimum(AVLTree tree)
         tree = tree->left;
     return tree;
 }
- 
 /* 
  * 查找最大结点：返回tree为根结点的AVL树的最大结点。
  */
@@ -115,7 +106,6 @@ Node* avltree_maximum(AVLTree tree)
         tree = tree->right;
     return tree;
 }
-
 /*
  * LL：左左对应的情况(左单旋转)。
  *
@@ -134,7 +124,6 @@ static Node* left_left_rotation(AVLTree k2)
 
     return k1;
 }
-
 /*
  * RR：右右对应的情况(右单旋转)。
  *
@@ -153,7 +142,6 @@ static Node* right_right_rotation(AVLTree k1)
 
     return k2;
 }
-
 /*
  * LR：左右对应的情况(左双旋转)。
  *
@@ -165,7 +153,6 @@ static Node* left_right_rotation(AVLTree k3)
 
     return left_left_rotation(k3);
 }
-
 /*
  * RL：右左对应的情况(右双旋转)。
  *
@@ -177,7 +164,6 @@ static Node* right_left_rotation(AVLTree k1)
 
     return right_right_rotation(k1);
 }
-
 /*
  * 创建AVL树结点。
  *
@@ -199,7 +185,6 @@ static Node* avltree_create_node(Type key, Node *left, Node* right)
 
     return p;
 }
-
 /* 
  * 将结点插入到AVL树中，并返回根节点
  *
@@ -254,7 +239,6 @@ Node* avltree_insert(AVLTree tree, Type key)
 
     return tree;
 }
-
 /* 
  * 删除结点(z)，返回根节点
  *
@@ -336,7 +320,6 @@ static Node* delete_node(AVLTree tree, Node *z)
 
     return tree;
 }
-
 /* 
  * 删除结点(key是节点值)，返回根节点
  *
@@ -354,7 +337,6 @@ Node* avltree_delete(AVLTree tree, Type key)
         tree = delete_node(tree, z);
     return tree;
 }
-
 /* 
  * 销毁AVL树
  */
@@ -370,7 +352,6 @@ void destroy_avltree(AVLTree tree)
 
     free(tree);
 }
-
 /*
  * 打印"AVL树"
  *
