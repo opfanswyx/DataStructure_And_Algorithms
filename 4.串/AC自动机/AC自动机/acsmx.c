@@ -97,7 +97,7 @@ static void AC_FREE (void *p)
 */ 
 typedef struct _qnode
 {
-	int state;					//????????
+	int state;					//状态信息
 	struct _qnode *next;
 }QNODE;
 
@@ -142,7 +142,7 @@ static void queue_add (QUEUE *s, int state)
 	{
 		q = (QNODE *) AC_MALLOC (sizeof (QNODE));
 		MEMASSERT (q, "queue_add");
-		q->state = state;								//????????????
+		q->state = state;								//状态信息
 		q->next = 0;
 		/*Add the new Node into the queue*/
 		s->tail->next = q;
@@ -257,7 +257,7 @@ static void AddMatchListEntry (ACSM_STRUCT * acsm, int state, ACSM_PATTERN * px)
 
 /* 
 * Add Pattern States
-* 将字符串链表里的字符串构造成字典树
+* 将字符串链表里的字符串构造成字典树图
 */ 
 static void AddPatternStates (ACSM_STRUCT * acsm, ACSM_PATTERN * p) 
 {
