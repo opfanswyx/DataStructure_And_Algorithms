@@ -8,6 +8,7 @@ arch
 ```
 ## 网络相关
 ```
+mii-tool
 brctl
 ifconfig
 service network status
